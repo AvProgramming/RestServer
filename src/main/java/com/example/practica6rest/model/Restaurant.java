@@ -25,6 +25,9 @@ public class Restaurant {
     private Integer capacity;
 
     @OneToMany(mappedBy = "restaurant")
+    private List<FoodOrder> foodOrder;
+
+    @OneToMany(mappedBy = "restaurant")
     private List<RestDesk> restDesks;
 
     public Restaurant(String city, Integer capacity) {
