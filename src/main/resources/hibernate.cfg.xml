@@ -16,5 +16,6 @@
     <mapping class="com.example.practica6rest.model.Restaurant"/>
     <mapping class="com.example.practica6rest.model.Product"/>
     <mapping class="com.example.practica6rest.model.FoodOrder"/>
+    <mapping class="com.example.practica6rest.model.RestDesk"/>
   </session-factory>
 </hibernate-configuration>
