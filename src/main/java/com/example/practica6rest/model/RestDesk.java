@@ -2,24 +2,27 @@ package com.example.practica6rest.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
 @Setter
+@ToString
+@Table(name = "rest_desk")
 public class RestDesk {
 
     @EmbeddedId
     private RestDeskId id;
 
     @ManyToOne
-    @MapsId("restaurantId")
+    @MapsId("restaurant_id")
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
     @ManyToOne
-    @MapsId("deskId")
+    @MapsId("desk_id")
     @JoinColumn(name = "desk_id")
     private Desk desk;
 

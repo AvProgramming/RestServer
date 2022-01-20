@@ -2,6 +2,7 @@ package com.example.practica6rest.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
@@ -9,6 +10,8 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@ToString
+@Table(name = "restaurant")
 public class Restaurant {
 
     @Id
@@ -32,13 +35,11 @@ public class Restaurant {
     public Restaurant() {
     }
 
+    public List<FoodOrder> getFoodOrder() {
+        return foodOrder;
+    }
 
-    @Override
-    public String toString() {
-        return "Restaurant{" +
-                "id=" + id +
-                ", city='" + city + '\'' +
-                ", capacity=" + capacity +
-                '}';
+    public void setFoodOrder(List<FoodOrder> foodOrder) {
+        this.foodOrder = foodOrder;
     }
 }
