@@ -4,38 +4,41 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
-public class Restaurant  {
+public class Restaurant {
+
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
-    private String name;
+    @Column(columnDefinition = "VARCHAR(255) default ''")
+    private String city;
 
     @Column
     private Integer capacity;
 
     @OneToMany(mappedBy = "restaurant")
-    private Collection<FoodOrder> foodOrder;
+    private List<RestDesk> restDesks;
 
-    public Restaurant(String name, Integer capacity) {
-        this.name = name;
+    public Restaurant(String city, Integer capacity) {
+        this.city = city;
         this.capacity = capacity;
     }
 
     public Restaurant() {
     }
 
-    public Collection<FoodOrder> getFoodOrder() {
-        return foodOrder;
-    }
 
-    public void setFoodOrder(Collection<FoodOrder> foodOrder) {
-        this.foodOrder = foodOrder;
+    @Override
+    public String toString() {
+        return "Restaurant{" +
+                "id=" + id +
+                ", city='" + city + '\'' +
+                ", capacity=" + capacity +
+                '}';
     }
 }
