@@ -2,13 +2,17 @@ package com.example.practica6rest.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
 @Getter
 @Setter
+@ToString
+@Table(name = "restaurant")
 public class Restaurant {
 
     @Id
@@ -22,6 +26,9 @@ public class Restaurant {
     private Integer capacity;
 
     @OneToMany(mappedBy = "restaurant")
+    private Collection<FoodOrder> foodOrder;
+
+    @OneToMany(mappedBy = "restaurant")
     private List<RestDesk> restDesks;
 
     public Restaurant(String city, Integer capacity) {
@@ -32,13 +39,11 @@ public class Restaurant {
     public Restaurant() {
     }
 
+    public Collection<FoodOrder> getFoodOrder() {
+        return foodOrder;
+    }
 
-    @Override
-    public String toString() {
-        return "Restaurant{" +
-                "id=" + id +
-                ", city='" + city + '\'' +
-                ", capacity=" + capacity +
-                '}';
+    public void setFoodOrder(Collection<FoodOrder> foodOrder) {
+        this.foodOrder = foodOrder;
     }
 }
