@@ -1,8 +1,13 @@
 package com.example.practica6rest.model;
 
+import lombok.ToString;
+
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
+@ToString
+@Table(name = "client")
 public class Client {
 
     @Id
@@ -17,6 +22,9 @@ public class Client {
 
     @Column
     private Integer phone_number;
+
+    @OneToMany(mappedBy = "client")
+    private Collection<FoodOrder> order;
 
     public Client(String name, String email, Integer phone_number) {
         this.name = name;
@@ -57,5 +65,13 @@ public class Client {
 
     public void setPhone_number(Integer phone_number) {
         this.phone_number = phone_number;
+    }
+
+    public Collection<FoodOrder> getOrder() {
+        return order;
+    }
+
+    public void setOrder(Collection<FoodOrder> order) {
+        this.order = order;
     }
 }
