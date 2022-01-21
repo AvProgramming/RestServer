@@ -10,11 +10,12 @@ import java.io.Serializable;
 @Embeddable
 @Getter
 @Setter
-public class ProductOrderId implements Serializable {
-
-    @Column(name = "product_order_id")
-    Long product_order_id;
+public class ProductPurchaseId implements Serializable {
 
     @Column(name = "product_id")
-    Long product_id;
+    private Long product_id;
+
+    @Column(name = "purchase_id")
+    private Long purchase_id;
+
 }

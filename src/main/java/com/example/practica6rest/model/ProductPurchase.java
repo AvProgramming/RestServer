@@ -1,6 +1,6 @@
 package com.example.practica6rest.model;
 
-import com.example.practica6rest.model.MtoM.ProductOrderId;
+import com.example.practica6rest.model.MtoM.ProductPurchaseId;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -11,11 +11,11 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
-@Table(name = "product_order")
-public class ProductOrder {
+@Table(name = "product_purchase")
+public class ProductPurchase {
 
     @EmbeddedId
-    private ProductOrderId id;
+    private ProductPurchaseId id;
 
     @ManyToOne
     @MapsId("purchase_id")
@@ -27,11 +27,11 @@ public class ProductOrder {
     @JoinColumn(name = "product_id")
     private Desk desk;
 
-    public ProductOrder(Purchase purchase, Desk desk) {
+    public ProductPurchase(Purchase purchase, Desk desk) {
         this.purchase = purchase;
         this.desk = desk;
     }
 
-    public ProductOrder() {
+    public ProductPurchase() {
     }
 }
