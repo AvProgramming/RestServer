@@ -12,8 +12,8 @@ import java.io.Serializable;
 @Setter
 public class ProductOrderId implements Serializable {
 
-    @Column(name = "product_order_id")
-    Long product_order_id;
+    @Column(name = "purchase_id")
+    Long purchase_id;
 
     @Column(name = "product_id")
     Long product_id;

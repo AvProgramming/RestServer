@@ -6,6 +6,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -34,6 +35,9 @@ public class Purchase {
     @ManyToOne
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
+
+    @OneToMany(mappedBy = "purchase")
+    private List<ProductPurchase> productPurchase;
 
     public Purchase(Date time, String content, Integer total_price, Client client) {
         this.time = time;

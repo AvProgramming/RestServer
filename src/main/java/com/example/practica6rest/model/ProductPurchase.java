@@ -11,8 +11,8 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
-@Table(name = "product_order")
-public class ProductOrder {
+@Table(name = "product_purchase")
+public class ProductPurchase {
 
     @EmbeddedId
     private ProductOrderId id;
@@ -25,13 +25,13 @@ public class ProductOrder {
     @ManyToOne
     @MapsId("product_id")
     @JoinColumn(name = "product_id")
-    private Desk desk;
+    private Product product;
 
-    public ProductOrder(Purchase purchase, Desk desk) {
+    public ProductPurchase(Purchase purchase, Product product) {
         this.purchase = purchase;
-        this.desk = desk;
+        this.product = product;
     }
 
-    public ProductOrder() {
+    public ProductPurchase() {
     }
 }

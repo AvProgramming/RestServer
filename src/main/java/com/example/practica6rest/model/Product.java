@@ -3,8 +3,11 @@ package com.example.practica6rest.model;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.apache.catalina.LifecycleState;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Getter
@@ -25,6 +28,9 @@ public class Product {
 
     @Column
     private String img_url;
+
+    @OneToMany(mappedBy = "product")
+    private List<ProductPurchase> productPurchase;
 
     public Product(String product_name, Integer price, String img_url) {
         this.product_name = product_name;
