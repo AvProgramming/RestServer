@@ -1,6 +1,6 @@
 package com.example.practica6rest.model;
 
-import com.example.practica6rest.model.MtoM.ProductOrderId;
+import com.example.practica6rest.model.MtoM.ProductPurchaseId;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +15,7 @@ import javax.persistence.*;
 public class ProductPurchase {
 
     @EmbeddedId
-    private ProductOrderId id;
+    private ProductPurchaseId id;
 
     @ManyToOne
     @MapsId("purchase_id")

@@ -13,8 +13,8 @@ import java.io.Serializable;
 public class RestDeskId implements Serializable {
 
     @Column(name = "restaurant_id")
-    Long restaurant_id;
+    private Long restaurant_id;
 
     @Column(name = "desk_id")
-    Long desk_id;
+    private Long desk_id;
 }
