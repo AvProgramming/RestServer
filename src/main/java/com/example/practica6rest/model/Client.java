@@ -28,7 +28,7 @@ public class Client {
     private Integer phone_number;
 
     @OneToMany(mappedBy = "client")
-    private List<FoodOrder> order;
+    private List<Purchase> order;
 
     @OneToMany(mappedBy = "client")
     private List<Reservation> reservation;

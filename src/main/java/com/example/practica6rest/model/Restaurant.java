@@ -5,7 +5,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -26,7 +25,7 @@ public class Restaurant {
     private Integer capacity;
 
     @OneToMany(mappedBy = "restaurant")
-    private List<FoodOrder> foodOrder;
+    private List<Purchase> purchase;
 
     @OneToMany(mappedBy = "restaurant")
     private List<RestDesk> restDesks;

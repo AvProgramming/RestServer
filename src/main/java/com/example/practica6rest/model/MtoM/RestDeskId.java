@@ -1,4 +1,4 @@
-package com.example.practica6rest.model;
+package com.example.practica6rest.model.MtoM;
 
 import lombok.Getter;
 import lombok.Setter;

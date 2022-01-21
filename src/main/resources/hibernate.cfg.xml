@@ -13,9 +13,11 @@
     <property name="hibernate.hbm2ddl.auto">update</property>
 
     <mapping class="com.example.practica6rest.model.Client"/>
+    <mapping class="com.example.practica6rest.model.Desk"/>
     <mapping class="com.example.practica6rest.model.Restaurant"/>
     <mapping class="com.example.practica6rest.model.Product"/>
-    <mapping class="com.example.practica6rest.model.FoodOrder"/>
+    <mapping class="com.example.practica6rest.model.Purchase"/>
     <mapping class="com.example.practica6rest.model.RestDesk"/>
+    <mapping class="com.example.practica6rest.model.Reservation"/>
   </session-factory>
 </hibernate-configuration>

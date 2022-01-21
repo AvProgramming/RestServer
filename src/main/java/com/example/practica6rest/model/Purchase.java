@@ -11,8 +11,8 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
-@Table(name = "food_order")
-public class FoodOrder {
+@Table(name = "purchase")
+public class Purchase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,13 +35,13 @@ public class FoodOrder {
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
-    public FoodOrder(Date time, String content, Integer total_price, Client client) {
+    public Purchase(Date time, String content, Integer total_price, Client client) {
         this.time = time;
         this.content = content;
         this.total_price = total_price;
         this.client = client;
     }
 
-    public FoodOrder() {
+    public Purchase() {
     }
 }
