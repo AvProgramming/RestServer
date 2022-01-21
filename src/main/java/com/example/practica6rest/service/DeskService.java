@@ -1,4 +1,4 @@
-package com.example.practica6rest.service.impl;
+package com.example.practica6rest.service;
 
 import com.example.practica6rest.model.Desk;
 

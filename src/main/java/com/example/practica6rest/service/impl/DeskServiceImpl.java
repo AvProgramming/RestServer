@@ -2,6 +2,7 @@ package com.example.practica6rest.service.impl;
 
 import com.example.practica6rest.model.Desk;
 import com.example.practica6rest.repository.DeskRepository;
+import com.example.practica6rest.service.DeskService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

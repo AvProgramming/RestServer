@@ -1,9 +1,9 @@
 package com.example.practica6rest.controller;
 
 import com.example.practica6rest.model.Client;
-import com.example.practica6rest.repository.ClientRepository;
+import com.example.practica6rest.service.ClientService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,25 +12,25 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 public class ClientController {
 
-    final ClientRepository clientRepository;
+    final ClientService clientService;
 
     @Autowired
-    public ClientController(ClientRepository clientRepository) {
-        this.clientRepository = clientRepository;
+    public ClientController(ClientService clientService) {
+        this.clientService = clientService;
     }
+
 
     @GetMapping("clients")
     public List<Client> getClients() {
-        return clientRepository.findAll();
+        return clientService.getClient();
     }
 
     @PostMapping("createClient")
     public ResponseEntity<Client> createClient(@RequestBody Client newClient) {
-        Client client = clientRepository.save(newClient);
-
-        return new ResponseEntity<>(client, HttpStatus.CREATED);
+       return clientService.registry(newClient);
     }
 }
