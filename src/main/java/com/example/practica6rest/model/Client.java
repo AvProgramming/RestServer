@@ -5,7 +5,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -29,7 +28,7 @@ public class Client {
     private Integer phone_number;
 
     @OneToMany(mappedBy = "client")
-    private List<FoodOrder> order;
+    private List<Purchase> order;
 
     @OneToMany(mappedBy = "client")
     private List<Reservation> reservation;

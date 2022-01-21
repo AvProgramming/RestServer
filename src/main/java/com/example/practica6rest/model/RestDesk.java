@@ -1,5 +1,6 @@
 package com.example.practica6rest.model;
 
+import com.example.practica6rest.model.MtoM.RestDeskId;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
