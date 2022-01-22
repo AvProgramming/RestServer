@@ -5,10 +5,7 @@ import com.example.practica6rest.service.ClientService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,13 +21,23 @@ public class ClientController {
     }
 
 
-    @GetMapping("clients")
+    @GetMapping("/clients")
     public List<Client> getClients() {
         return clientService.getClient();
     }
 
-    @PostMapping("createClient")
+    @PostMapping("/clients")
     public ResponseEntity<Client> createClient(@RequestBody Client newClient) {
        return clientService.registry(newClient);
+    }
+
+    @PutMapping("/clients/{id}")
+    public Client updateClient(@RequestBody Client client, @PathVariable Long id) {
+       return clientService.updateClient(client, id);
+    }
+
+    @DeleteMapping("/clients/{id}")
+    public void deleteClient(@PathVariable Long id) {
+        clientService.deleteClient(id);
     }
 }

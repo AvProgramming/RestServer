@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -33,4 +34,26 @@ public class ClientServiceImpl implements ClientService {
     public List<Client> getClient() {
         return clientRepository.findAll();
     }
+
+    @Override
+    public Client updateClient(Client newClient, Long id) {
+        return clientRepository.findById(id)
+                .map(client -> {
+                    client.setName(newClient.getName());
+                    client.setEmail(newClient.getEmail());
+                    client.setOrder(newClient.getOrder());
+                    client.setPhone_number(newClient.getPhone_number());
+                    return clientRepository.save(client);
+                })
+                .orElseGet(() -> {
+                    newClient.setId(id);
+                    return clientRepository.save(newClient);
+                });
+    }
+
+    @Override
+    public void deleteClient(Long id) {
+        clientRepository.deleteById(id);
+    }
+
 }
