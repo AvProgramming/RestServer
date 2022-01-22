@@ -4,9 +4,7 @@ import com.example.practica6rest.model.Desk;
 import com.example.practica6rest.service.DeskService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
@@ -19,8 +17,24 @@ public class DeskController {
         this.deskService = deskService;
     }
 
-    @PostMapping(value = "/createDesk")
-    public Desk create(@RequestBody Desk newDesk) {
+    @PostMapping(value = "/desks")
+    public Desk createDesk(@RequestBody Desk newDesk) {
         return deskService.registry(newDesk);
     }
+
+    @GetMapping(value = "/desks")
+    public Desk getDeskById(@RequestParam Long id) {
+        return deskService.getById(id);
+    }
+
+    @PutMapping(value = "/desks")
+    public Desk updateDesk(@RequestBody Desk newDesk, @RequestParam Long id)  {
+        return deskService.update(newDesk, id);
+    }
+
+    @DeleteMapping(value = "/desks")
+    public void deleteDesk(@RequestParam Long id)  {
+        deskService.delete(id);
+    }
+
 }

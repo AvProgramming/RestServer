@@ -17,12 +17,12 @@ public class RestDesk {
     @EmbeddedId
     private RestDeskId id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("restaurant_id")
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("desk_id")
     @JoinColumn(name = "desk_id")
     private Desk desk;
