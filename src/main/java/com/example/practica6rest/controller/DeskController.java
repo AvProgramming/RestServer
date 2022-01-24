@@ -1,10 +1,14 @@
 package com.example.practica6rest.controller;
 
 import com.example.practica6rest.model.Desk;
+import com.example.practica6rest.model.Restaurant;
 import com.example.practica6rest.service.DeskService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -17,23 +21,28 @@ public class DeskController {
         this.deskService = deskService;
     }
 
+    @GetMapping("/desks")
+    public List<Desk> getDesks() {
+        return deskService.getAll();
+    }
+
     @PostMapping(value = "/desks")
-    public Desk createDesk(@RequestBody Desk newDesk) {
+    public ResponseEntity<Desk> createDesk(@RequestBody Desk newDesk) {
         return deskService.registry(newDesk);
     }
 
-    @GetMapping(value = "/desks")
-    public Desk getDeskById(@RequestParam Long id) {
+    @GetMapping(value = "/desks/{id}")
+    public Desk getDeskById(@PathVariable Long id) {
         return deskService.getById(id);
     }
 
-    @PutMapping(value = "/desks")
-    public Desk updateDesk(@RequestBody Desk newDesk, @RequestParam Long id)  {
+    @PutMapping(value = "/desks/{id}")
+    public Desk updateDesk(@RequestBody Desk newDesk, @PathVariable Long id)  {
         return deskService.update(newDesk, id);
     }
 
-    @DeleteMapping(value = "/desks")
-    public void deleteDesk(@RequestParam Long id)  {
+    @DeleteMapping(value = "/desks/{id}")
+    public void deleteDesk(@PathVariable Long id)  {
         deskService.delete(id);
     }
 

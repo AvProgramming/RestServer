@@ -24,6 +24,15 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public Product getById(Long id) {
+        if (!productRepository.existsById(id)) {
+            throw new EntityNotFoundException("NO SUCH DESK");
+
+        }
+        return productRepository.getById(id);
+    }
+
+    @Override
     public ResponseEntity<Product> registry(Product newProduct) {
         //TODO logic
         Product product = productRepository.save(newProduct);

@@ -24,6 +24,15 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
+    public Client getById(Long id) {
+        if (!clientRepository.existsById(id)) {
+            throw new EntityNotFoundException("NO SUCH DESK");
+
+        }
+        return clientRepository.getById(id);
+    }
+
+    @Override
     public ResponseEntity<Client> registry(Client newClient) {
         //TODO logic
         Client client = clientRepository.save(newClient);

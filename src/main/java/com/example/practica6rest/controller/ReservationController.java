@@ -30,6 +30,11 @@ public class ReservationController {
         return reservationService.registry(newReservation);
     }
 
+    @GetMapping(value = "/reservations/{id}")
+    public Reservation getReservationById(@PathVariable Long id) {
+        return reservationService.getById(id);
+    }
+
     @PutMapping("/reservations/{id}")
     public Reservation updatePurchase(@RequestBody Reservation newReservation, @PathVariable Long id) {
         return reservationService.update(newReservation, id);

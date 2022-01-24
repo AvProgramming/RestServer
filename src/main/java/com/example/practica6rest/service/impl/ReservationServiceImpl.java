@@ -25,6 +25,15 @@ public class ReservationServiceImpl implements ReservationService {
 
 
     @Override
+    public Reservation getById(Long id) {
+        if (!reservationRepository.existsById(id)) {
+            throw new EntityNotFoundException("NO SUCH DESK");
+
+        }
+        return reservationRepository.getById(id);
+    }
+
+    @Override
     public ResponseEntity<Reservation> registry(Reservation newReservation) {
         //TODO logic
         Reservation reservation = reservationRepository.save(newReservation);

@@ -31,6 +31,11 @@ public class ProductController {
         return productService.registry(newProduct);
     }
 
+    @GetMapping(value = "/products/{id}")
+    public Product getProductById(@PathVariable Long id) {
+        return productService.getById(id);
+    }
+
     @PutMapping("/products/{id}")
     public Product updateClient(@RequestBody Product product, @PathVariable Long id) {
         return productService.update(product, id);

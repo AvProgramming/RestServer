@@ -25,6 +25,14 @@ public class PurchaseServiceImpl implements PurchaseService {
 
 
     @Override
+    public Purchase getById(Long id) {
+        if (!purchaseRepository.existsById(id)) {
+            throw new EntityNotFoundException("NO SUCH DESK");
+        }
+        return purchaseRepository.getById(id);
+    }
+
+    @Override
     public ResponseEntity<Purchase> registry(Purchase newPurchase) {
         //TODO logic
         Purchase purchase = purchaseRepository.save(newPurchase);
@@ -55,9 +63,9 @@ public class PurchaseServiceImpl implements PurchaseService {
 
     @Override
     public void delete(Long id) {
-    //TODO logic
+        //TODO logic
         if (!purchaseRepository.existsById(id)) {
-            throw new EntityNotFoundException("NO SUCH PURCHASE");     //@Todo Exceptions
+            throw new EntityNotFoundException("NO SUCH PURCHASE");     //Todo Exceptions
         }
         purchaseRepository.deleteById(id);
     }

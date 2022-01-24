@@ -30,6 +30,12 @@ public class PurchaseController {
         return purchaseService.registry(newPurchase);
     }
 
+
+    @GetMapping(value = "/purchase/{id}")
+    public Purchase getPurchaseById(@PathVariable Long id) {
+        return purchaseService.getById(id);
+    }
+
     @PutMapping("/purchase/{id}")
     public Purchase updatePurchase(@RequestBody Purchase purchase, @PathVariable Long id) {
         return purchaseService.update(purchase, id);

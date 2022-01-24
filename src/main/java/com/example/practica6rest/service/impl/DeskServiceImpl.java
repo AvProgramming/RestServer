@@ -5,9 +5,12 @@ import com.example.practica6rest.repository.DeskRepository;
 import com.example.practica6rest.service.DeskService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -21,6 +24,11 @@ public class DeskServiceImpl implements DeskService {
     }
 
     @Override
+    public List<Desk> getAll() {
+        return deskRepository.findAll();
+    }
+
+    @Override
     public Desk getById(Long id) {
         //@Todo logic
             if (!deskRepository.existsById(id)) {
@@ -28,16 +36,15 @@ public class DeskServiceImpl implements DeskService {
 
             }
         return deskRepository.getById(id);
-
     }
 
     @Override
-    public Desk registry(Desk newDesk) {
+    public ResponseEntity<Desk> registry(Desk newDesk) {
         //@Todo logic
         Desk desk = deskRepository.save(newDesk);
         log.info(String.valueOf(desk));
 
-        return desk;
+        return new ResponseEntity<>(desk, HttpStatus.CREATED);
     }
 
     @Override
