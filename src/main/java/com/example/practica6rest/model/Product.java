@@ -3,10 +3,8 @@ package com.example.practica6rest.model;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.apache.catalina.LifecycleState;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.List;
 
 @Entity

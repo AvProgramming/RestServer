@@ -23,21 +23,21 @@ public class ClientController {
 
     @GetMapping("/clients")
     public List<Client> getClients() {
-        return clientService.getClient();
+        return clientService.getAll();
     }
 
     @PostMapping("/clients")
     public ResponseEntity<Client> createClient(@RequestBody Client newClient) {
-       return clientService.registry(newClient);
+        return clientService.registry(newClient);
     }
 
     @PutMapping("/clients/{id}")
     public Client updateClient(@RequestBody Client client, @PathVariable Long id) {
-       return clientService.updateClient(client, id);
+        return clientService.update(client, id);
     }
 
     @DeleteMapping("/clients/{id}")
     public void deleteClient(@PathVariable Long id) {
-        clientService.deleteClient(id);
+        clientService.delete(id);
     }
 }

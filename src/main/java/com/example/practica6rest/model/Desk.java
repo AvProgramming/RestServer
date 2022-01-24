@@ -1,11 +1,11 @@
 package com.example.practica6rest.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -25,11 +25,11 @@ public class Desk {
     @Column
     private Integer max_capacity;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "desk")
+    @OneToMany(mappedBy = "desk")
     private List<RestDesk> restDesks;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "desk")
-    private List<Reservation> reservation;
+    @OneToMany(mappedBy = "desk")
+    private List<Reservation> reservations;
 
     public Desk(Integer number, Integer max_capacity) {
         this.number = number;

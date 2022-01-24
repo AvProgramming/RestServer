@@ -9,8 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Slf4j
@@ -25,34 +25,38 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public ResponseEntity<Client> registry(Client newClient) {
+        //TODO logic
         Client client = clientRepository.save(newClient);
+        log.info(String.valueOf(client));
 
         return new ResponseEntity<>(client, HttpStatus.CREATED);
     }
 
     @Override
-    public List<Client> getClient() {
+    public List<Client> getAll() {
+        //TODO logic
         return clientRepository.findAll();
     }
 
     @Override
-    public Client updateClient(Client newClient, Long id) {
+    public Client update(Client newClient, Long id) {
+        //TODO logic
         return clientRepository.findById(id)
                 .map(client -> {
                     client.setName(newClient.getName());
                     client.setEmail(newClient.getEmail());
-                    client.setOrder(newClient.getOrder());
                     client.setPhone_number(newClient.getPhone_number());
                     return clientRepository.save(client);
                 })
-                .orElseGet(() -> {
-                    newClient.setId(id);
-                    return clientRepository.save(newClient);
-                });
+                .orElseThrow(() -> new EntityNotFoundException("NO SUCH CLIENT"));
     }
 
     @Override
-    public void deleteClient(Long id) {
+    public void delete(Long id) {
+        //TODO logic
+        if (!clientRepository.existsById(id)) {
+            throw new EntityNotFoundException("NO SUCH CLIENT");     //Todo Exceptions
+        }
         clientRepository.deleteById(id);
     }
 

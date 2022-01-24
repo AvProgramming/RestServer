@@ -31,7 +31,7 @@ public class Restaurant {
     private List<RestDesk> restDesks;
 
     @OneToMany(mappedBy = "restaurant")
-    private List<Reservation> reservation;
+    private List<Reservation> reservations;
 
     public Restaurant(String city, Integer capacity) {
         this.city = city;

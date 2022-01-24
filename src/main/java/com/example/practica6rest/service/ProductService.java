@@ -8,7 +8,7 @@ import java.util.List;
 public interface ProductService {
     ResponseEntity<Product> registry(Product newProduct);
 
-    List<Product> getProduct();
+    List<Product> getAll();
 
     Product update(Product newProduct, Long id);
 
