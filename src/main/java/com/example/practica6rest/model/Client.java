@@ -28,10 +28,10 @@ public class Client {
     private Integer phone_number;
 
     @OneToMany(mappedBy = "client")
-    private List<Purchase> order;
+    private List<Purchase> orders;
 
     @OneToMany(mappedBy = "client")
-    private List<Reservation> reservation;
+    private List<Reservation> reservations;
 
     public Client(String name, String email, Integer phone_number) {
         this.name = name;

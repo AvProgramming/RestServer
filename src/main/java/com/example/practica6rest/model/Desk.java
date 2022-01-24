@@ -29,7 +29,7 @@ public class Desk {
     private List<RestDesk> restDesks;
 
     @OneToMany(mappedBy = "desk")
-    private List<Reservation> reservation;
+    private List<Reservation> reservations;
 
     public Desk(Integer number, Integer max_capacity) {
         this.number = number;
