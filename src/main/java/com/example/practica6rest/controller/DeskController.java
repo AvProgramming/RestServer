@@ -1,7 +1,6 @@
 package com.example.practica6rest.controller;
 
 import com.example.practica6rest.model.Desk;
-import com.example.practica6rest.model.Restaurant;
 import com.example.practica6rest.service.DeskService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,12 +36,12 @@ public class DeskController {
     }
 
     @PutMapping(value = "/desks/{id}")
-    public Desk updateDesk(@RequestBody Desk newDesk, @PathVariable Long id)  {
+    public Desk updateDesk(@RequestBody Desk newDesk, @PathVariable Long id) {
         return deskService.update(newDesk, id);
     }
 
     @DeleteMapping(value = "/desks/{id}")
-    public void deleteDesk(@PathVariable Long id)  {
+    public void deleteDesk(@PathVariable Long id) {
         deskService.delete(id);
     }
 

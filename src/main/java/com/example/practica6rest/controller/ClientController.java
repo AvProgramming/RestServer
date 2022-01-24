@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 public class ClientController {
 
-    final ClientService clientService;
+    private final ClientService clientService;
 
     @Autowired
     public ClientController(ClientService clientService) {
