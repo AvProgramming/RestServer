@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 public class ProductController {
 
-    final ProductService productService;
+    private final ProductService productService;
 
     @Autowired
     public ProductController(ProductService productService) {

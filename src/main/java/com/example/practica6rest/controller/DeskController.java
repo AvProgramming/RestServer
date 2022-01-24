@@ -22,18 +22,18 @@ public class DeskController {
         return deskService.registry(newDesk);
     }
 
-    @GetMapping(value = "/desks")
-    public Desk getDeskById(@RequestParam Long id) {
+    @GetMapping(value = "/desks/{id}")
+    public Desk getDeskById(@PathVariable Long id) {
         return deskService.getById(id);
     }
 
-    @PutMapping(value = "/desks")
-    public Desk updateDesk(@RequestBody Desk newDesk, @RequestParam Long id)  {
+    @PutMapping(value = "/desks/{id}")
+    public Desk updateDesk(@RequestBody Desk newDesk, @PathVariable Long id) {
         return deskService.update(newDesk, id);
     }
 
-    @DeleteMapping(value = "/desks")
-    public void deleteDesk(@RequestParam Long id)  {
+    @DeleteMapping(value = "/desks/{id}")
+    public void deleteDesk(@PathVariable Long id) {
         deskService.delete(id);
     }
 

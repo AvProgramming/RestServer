@@ -1,5 +1,7 @@
 package com.example.practica6rest.model;
 
+import com.example.practica6rest.model.enumeral.ProductType;
+import com.example.practica6rest.model.enumeral.PurchaseStatus;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -28,6 +30,10 @@ public class Purchase {
     @Column
     private Integer total_price;
 
+    @Column
+    @Enumerated(EnumType.ORDINAL)
+    private PurchaseStatus type;
+
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;
@@ -39,11 +45,11 @@ public class Purchase {
     @OneToMany(mappedBy = "purchase")
     private List<ProductPurchase> productPurchase;
 
-    public Purchase(Date time, String content, Integer total_price, Client client) {
+    public Purchase(Date time, String content, Integer total_price, PurchaseStatus type) {
         this.time = time;
         this.content = content;
         this.total_price = total_price;
-        this.client = client;
+        this.type = type;
     }
 
     public Purchase() {
