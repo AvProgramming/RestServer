@@ -4,6 +4,8 @@ import com.example.practica6rest.model.Desk;
 import com.example.practica6rest.service.DeskService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,5 +46,10 @@ public class DeskController {
     public void deleteDesk(@PathVariable Long id) {
         deskService.delete(id);
     }
+
+//    @GetMapping(value = "/blogPageable")
+//    public Page blogPageable(Pageable pageable) {
+//        return deskService.findPaginated(pageable);
+//    }
 
 }

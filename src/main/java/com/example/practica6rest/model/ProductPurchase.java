@@ -17,12 +17,12 @@ public class ProductPurchase {
     @EmbeddedId
     private ProductPurchaseId id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("purchase_id")
     @JoinColumn(name = "purchase_id")
     private Purchase purchase;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("product_id")
     @JoinColumn(name = "product_id")
     private Product product;

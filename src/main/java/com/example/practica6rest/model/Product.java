@@ -1,6 +1,7 @@
 package com.example.practica6rest.model;
 
 import com.example.practica6rest.model.enumeral.ProductType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -20,7 +21,7 @@ public class Product {
     private Long id;
 
     @Column
-    private String product_name;
+    private String name;
 
     @Column
     private Integer price;
@@ -38,8 +39,8 @@ public class Product {
     @OneToMany(mappedBy = "product")
     private List<ProductPurchase> productPurchase;
 
-    public Product(String product_name, Integer price, String img_url, Boolean vegan, ProductType type) {
-        this.product_name = product_name;
+    public Product(String name, Integer price, String img_url, Boolean vegan, ProductType type) {
+        this.name = name;
         this.price = price;
         this.img_url = img_url;
         this.vegan = vegan;

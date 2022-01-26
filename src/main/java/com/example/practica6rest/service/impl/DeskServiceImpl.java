@@ -5,6 +5,8 @@ import com.example.practica6rest.repository.DeskRepository;
 import com.example.practica6rest.service.DeskService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -31,10 +33,9 @@ public class DeskServiceImpl implements DeskService {
     @Override
     public Desk getById(Long id) {
         //@Todo logic
-            if (!deskRepository.existsById(id)) {
-                throw new EntityNotFoundException("NO SUCH DESK");
-
-            }
+        if (!deskRepository.existsById(id)) {
+            throw new EntityNotFoundException("NO SUCH DESK");
+        }
         return deskRepository.getById(id);
     }
 
@@ -48,7 +49,7 @@ public class DeskServiceImpl implements DeskService {
     }
 
     @Override
-    public void delete(Long id)  {
+    public void delete(Long id) {
 
         if (!deskRepository.existsById(id)) {
             throw new EntityNotFoundException("NO SUCH DESK");     //@Todo Exceptions
@@ -57,7 +58,7 @@ public class DeskServiceImpl implements DeskService {
     }
 
     @Override
-    public Desk update(Desk newDesk, Long id)  {
+    public Desk update(Desk newDesk, Long id) {
 
         if (!deskRepository.existsById(id)) {
             throw new EntityNotFoundException("NO SUCH DESK");       //@Todo Exceptions
@@ -69,4 +70,14 @@ public class DeskServiceImpl implements DeskService {
 
         return deskRepository.saveAndFlush(oldDesk);
     }
+
+//    @Override
+//    public Page findPaginated(Pageable pageable) {
+//        return null;
+//    }
+
+//    @Override
+//    public Page<Desk> findPaginated(int page, int size) {
+//        return null;
+//    }
 }

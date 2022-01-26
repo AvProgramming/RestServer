@@ -21,7 +21,7 @@ public class Reservation {
     @Column
     private Date time;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "desk_id")
     private Desk desk;
 
