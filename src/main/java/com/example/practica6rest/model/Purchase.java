@@ -28,7 +28,7 @@ public class Purchase {
     private String content;
 
     @Column
-    private Integer total_price;
+    private Double total_price;
 
     @Column
     @Enumerated(EnumType.ORDINAL)
@@ -42,10 +42,10 @@ public class Purchase {
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
-    @OneToMany(mappedBy = "purchase")
+    @OneToMany(mappedBy = "purchase", fetch = FetchType.LAZY)
     private List<ProductPurchase> productPurchase;
 
-    public Purchase(Date time, String content, Integer total_price, PurchaseStatus type) {
+    public Purchase(Date time, String content, Double total_price, PurchaseStatus type) {
         this.time = time;
         this.content = content;
         this.total_price = total_price;

@@ -24,7 +24,7 @@ public class Product {
     private String name;
 
     @Column
-    private Integer price;
+    private Double price;
 
     @Column
     private String img_url;
@@ -36,10 +36,11 @@ public class Product {
     @Enumerated(EnumType.ORDINAL)
     private ProductType type;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<ProductPurchase> productPurchase;
 
-    public Product(String name, Integer price, String img_url, Boolean vegan, ProductType type) {
+    public Product(String name, Double price, String img_url, Boolean vegan, ProductType type) {
         this.name = name;
         this.price = price;
         this.img_url = img_url;

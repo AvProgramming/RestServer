@@ -1,6 +1,5 @@
 package com.example.practica6rest.service.impl;
 
-import com.example.practica6rest.model.Client;
 import com.example.practica6rest.model.Restaurant;
 import com.example.practica6rest.repository.RestaurantRepository;
 import com.example.practica6rest.service.RestaurantService;

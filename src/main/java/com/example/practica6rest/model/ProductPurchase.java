@@ -1,6 +1,7 @@
 package com.example.practica6rest.model;
 
 import com.example.practica6rest.model.MtoM.ProductPurchaseId;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
