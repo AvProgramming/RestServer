@@ -52,7 +52,7 @@ public class ProductServiceImpl implements ProductService {
         //TODO logic
         return productRepository.findById(id)
                 .map(product -> {
-                    product.setProduct_name(newProduct.getProduct_name());
+                    product.setName(newProduct.getName());
                     product.setPrice(newProduct.getPrice());
                     product.setImg_url(newProduct.getImg_url());
                     return productRepository.save(product);

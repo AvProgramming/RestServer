@@ -21,5 +21,7 @@ public interface DeskService {
 //    Page findPaginated(Pageable pageable);
 
 //    Page<Desk> findPaginated(int page, int size);
-//    Page<Desk> findPaginated(int page, int size);
+    Page<Desk> findPaginated(int page, int size);
+
+    Page<Desk> findPaginated(int page, int size, String field);
 }
