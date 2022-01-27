@@ -6,7 +6,9 @@ import com.example.practica6rest.service.DeskService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -69,6 +71,16 @@ public class DeskServiceImpl implements DeskService {
         oldDesk.setMax_capacity(newDesk.getMax_capacity());
 
         return deskRepository.saveAndFlush(oldDesk);
+    }
+
+    @Override
+    public Page<Desk> findPaginated(int page, int size) {
+        return deskRepository.findAll(PageRequest.of(page, size));
+    }
+
+    @Override
+    public Page<Desk> findPaginated(int page, int size, String field) {
+        return deskRepository.findAll(PageRequest.of(page, size).withSort(Sort.by(field)));
     }
 
 //    @Override
