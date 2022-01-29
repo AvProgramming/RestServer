@@ -22,7 +22,7 @@ public class DeskController {
         this.deskService = deskService;
     }
 
-    @GetMapping("/")
+    @GetMapping(value = "/")
     public List<Desk> getDesks() {
         return deskService.getAll();
     }
@@ -49,14 +49,12 @@ public class DeskController {
 
     @GetMapping(value = "/pagination/{page}/{size}")
     public Page<Desk> getDesksPageable(@PathVariable int page, @PathVariable int size) {
-//        return deskService.findPaginated(pageable);
         Page<Desk> desks = deskService.findPaginated(page, size);
         return desks; //@TODO ResponseEntity
     }
 
     @GetMapping(value = "/pagination/{page}/{size}/{field}")
     public Page<Desk> getDesksPageableAndSorted(@PathVariable int page, @PathVariable int size, @PathVariable String field) {
-//        return deskService.findPaginated(pageable);
         Page<Desk> desks = deskService.findPaginated(page, size, field);
         return desks; //@TODO ResponseEntity
     }

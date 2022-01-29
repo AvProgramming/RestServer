@@ -18,9 +18,6 @@ public interface DeskService {
 
     Desk update(Desk newDesk, Long id);
 
-//    Page findPaginated(Pageable pageable);
-
-//    Page<Desk> findPaginated(int page, int size);
     Page<Desk> findPaginated(int page, int size);
 
     Page<Desk> findPaginated(int page, int size, String field);
