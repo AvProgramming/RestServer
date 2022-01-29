@@ -24,13 +24,13 @@ public class Restaurant {
     @Column
     private Integer capacity;
 
-    @OneToMany(mappedBy = "restaurant")
+    @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY)
     private List<Purchase> purchase;
 
-    @OneToMany(mappedBy = "restaurant")
+    @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY)
     private List<RestDesk> restDesks;
 
-    @OneToMany(mappedBy = "restaurant")
+    @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY)
     private List<Reservation> reservations;
 
     public Restaurant(String city, Integer capacity) {

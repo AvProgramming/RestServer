@@ -27,10 +27,10 @@ public class Client {
     @Column
     private Integer phone_number;
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
     private List<Purchase> orders;
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
     private List<Reservation> reservations;
 
     public Client(String name, String email, Integer phone_number) {

@@ -24,10 +24,10 @@ public class Desk {
     @Column
     private Integer max_capacity;
 
-    @OneToMany(mappedBy = "desk")
+    @OneToMany(mappedBy = "desk", fetch = FetchType.LAZY)
     private List<RestDesk> restDesks;
 
-    @OneToMany(mappedBy = "desk")
+    @OneToMany(mappedBy = "desk", fetch = FetchType.LAZY)
     private List<Reservation> reservations;
 
     public Desk(Integer number, Integer max_capacity) {
