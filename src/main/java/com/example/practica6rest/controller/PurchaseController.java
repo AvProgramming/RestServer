@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
 @Slf4j
+@RestController
+@RequestMapping(value = "/purchase")
 public class PurchaseController {
 
     private final PurchaseService purchaseService;
@@ -20,28 +21,27 @@ public class PurchaseController {
         this.purchaseService = purchaseService;
     }
 
-    @GetMapping("/purchase")
+    @GetMapping("/")
     public List<Purchase> getPurchases() {
         return purchaseService.getAll();
     }
 
-    @PostMapping("/purchase")
+    @PostMapping("/")
     public ResponseEntity<Purchase> createPurchase(@RequestBody Purchase newPurchase) {
         return purchaseService.registry(newPurchase);
     }
 
-
-    @GetMapping(value = "/purchase/{id}")
+    @GetMapping(value = "/{id}")
     public Purchase getPurchaseById(@PathVariable Long id) {
         return purchaseService.getById(id);
     }
 
-    @PutMapping("/purchase/{id}")
+    @PutMapping("/{id}")
     public Purchase updatePurchase(@RequestBody Purchase purchase, @PathVariable Long id) {
         return purchaseService.update(purchase, id);
     }
 
-    @DeleteMapping("/purchase/{id}")
+    @DeleteMapping("/{id}")
     public void deletePurchase(@PathVariable Long id) {
         purchaseService.delete(id);
     }

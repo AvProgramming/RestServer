@@ -11,6 +11,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
+@RequestMapping(value = "/products")
 public class ProductController {
 
     private final ProductService productService;
@@ -21,27 +22,27 @@ public class ProductController {
     }
 
 
-    @GetMapping("/products")
+    @GetMapping("/")
     public List<Product> getProducts() {
         return productService.getAll();
     }
 
-    @PostMapping("/products")
+    @PostMapping("/")
     public ResponseEntity<Product> createClient(@RequestBody Product newProduct) {
         return productService.registry(newProduct);
     }
 
-    @GetMapping(value = "/products/{id}")
+    @GetMapping(value = "/{id}")
     public Product getProductById(@PathVariable Long id) {
         return productService.getById(id);
     }
 
-    @PutMapping("/products/{id}")
+    @PutMapping("/{id}")
     public Product updateClient(@RequestBody Product product, @PathVariable Long id) {
         return productService.update(product, id);
     }
 
-    @DeleteMapping("/products/{id}")
+    @DeleteMapping("/{id}")
     public void deleteClient(@PathVariable Long id) {
         productService.delete(id);
     }

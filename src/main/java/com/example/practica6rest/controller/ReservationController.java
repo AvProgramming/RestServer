@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
 @Slf4j
+@RestController
+@RequestMapping(value = "/reservations")
 public class ReservationController {
 
     private final ReservationService reservationService;
@@ -20,27 +21,27 @@ public class ReservationController {
         this.reservationService = reservationService;
     }
 
-    @GetMapping("/reservations")
+    @GetMapping("/")
     public List<Reservation> getPurchases() {
         return reservationService.getAll();
     }
 
-    @PostMapping("/reservations")
+    @PostMapping("/")
     public ResponseEntity<Reservation> createPurchase(@RequestBody Reservation newReservation) {
         return reservationService.registry(newReservation);
     }
 
-    @GetMapping(value = "/reservations/{id}")
+    @GetMapping(value = "/{id}")
     public Reservation getReservationById(@PathVariable Long id) {
         return reservationService.getById(id);
     }
 
-    @PutMapping("/reservations/{id}")
+    @PutMapping("/{id}")
     public Reservation updatePurchase(@RequestBody Reservation newReservation, @PathVariable Long id) {
         return reservationService.update(newReservation, id);
     }
 
-    @DeleteMapping("/reservations/{id}")
+    @DeleteMapping("/{id}")
     public void deletePurchase(@PathVariable Long id) {
         reservationService.delete(id);
     }

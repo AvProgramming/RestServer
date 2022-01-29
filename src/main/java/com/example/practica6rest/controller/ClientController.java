@@ -11,6 +11,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
+@RequestMapping(value = "/clients")
 public class ClientController {
 
     private final ClientService clientService;
@@ -20,27 +21,27 @@ public class ClientController {
         this.clientService = clientService;
     }
 
-    @GetMapping("/clients")
+    @GetMapping("/")
     public List<Client> getClients() {
         return clientService.getAll();
     }
 
-    @PostMapping("/clients")
+    @PostMapping("/")
     public ResponseEntity<Client> createClient(@RequestBody Client newClient) {
         return clientService.registry(newClient);
     }
 
-    @GetMapping(value = "/clients/{id}")
+    @GetMapping(value = "/{id}")
     public Client getClientById(@PathVariable Long id) {
         return clientService.getById(id);
     }
 
-    @PutMapping("/clients/{id}")
+    @PutMapping("/{id}")
     public Client updateClient(@RequestBody Client client, @PathVariable Long id) {
         return clientService.update(client, id);
     }
 
-    @DeleteMapping("/clients/{id}")
+    @DeleteMapping("/{id}")
     public void deleteClient(@PathVariable Long id) {
         clientService.delete(id);
     }
