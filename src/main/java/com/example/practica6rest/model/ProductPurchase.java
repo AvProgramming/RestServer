@@ -16,7 +16,7 @@ import javax.persistence.*;
 public class ProductPurchase {
 
     @EmbeddedId
-    private ProductPurchaseId id;
+    private ProductPurchaseId id = new ProductPurchaseId();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("purchase_id")

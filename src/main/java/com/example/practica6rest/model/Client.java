@@ -1,5 +1,6 @@
 package com.example.practica6rest.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -28,9 +29,11 @@ public class Client {
     private Integer phone_number;
 
     @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
-    private List<Purchase> orders;
+    @JsonBackReference
+    private List<Purchase> purchases;
 
     @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
+    @JsonBackReference
     private List<Reservation> reservations;
 
     public Client(String name, String email, Integer phone_number) {
