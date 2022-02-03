@@ -51,7 +51,6 @@ public class PurchaseServiceImpl implements PurchaseService {
     @Override
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Purchase> registry(Purchase newPurchase) {
-
         Client client = newPurchase.getClient();
         Restaurant restaurant = newPurchase.getRestaurant();
 
@@ -62,20 +61,22 @@ public class PurchaseServiceImpl implements PurchaseService {
         if (restaurant== null || !restaurantRepository.existsById(restaurant.getId())) {
             throw new EntityNotFoundException("NO Restaurant");
         }
+        String content = newPurchase.getContent();
+        newPurchase.setContent("TEMPORAL"); //@TODO
 
         Purchase purchase = purchaseRepository.save(newPurchase);
         log.info(String.valueOf(purchase));
 
-        String content = newPurchase.getContent();
-
         Gson gson = new Gson();
 
-        List<Integer> listOfId = gson.fromJson(content, new TypeToken<List<Integer>>() {
+        log.info("CONTENT " + newPurchase.getContent());
+
+        List<Product> listOfId = gson.fromJson(content, new TypeToken<List<Product>>() {
         }.getType());
         List<ProductPurchase> productPurchases = new ArrayList<>();
 
-        for (Integer id : listOfId) {
-            Product product = productRepository.getById(Long.valueOf(id));
+        for (Product product : listOfId) {
+//            Product product = productRepository.getById(Long.valueOf(id));
             ProductPurchase productPurchase = new ProductPurchase(purchase, product);
             productPurchases.add(productPurchase);
         }
