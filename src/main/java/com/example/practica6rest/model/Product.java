@@ -1,7 +1,7 @@
 package com.example.practica6rest.model;
 
 import com.example.practica6rest.model.enumeral.ProductType;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -37,7 +37,7 @@ public class Product {
     private ProductType type;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-    @JsonIgnore
+    @JsonBackReference
     private List<ProductPurchase> productPurchase;
 
     public Product(String name, Double price, String img_url, Boolean vegan, ProductType type) {

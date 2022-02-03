@@ -1,7 +1,7 @@
 package com.example.practica6rest.model;
 
 import com.example.practica6rest.model.MtoM.ProductPurchaseId;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -26,6 +26,7 @@ public class ProductPurchase {
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("product_id")
     @JoinColumn(name = "product_id")
+    @JsonManagedReference
     private Product product;
 
     public ProductPurchase(Purchase purchase, Product product) {

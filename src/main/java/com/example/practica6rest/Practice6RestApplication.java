@@ -11,15 +11,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @SpringBootApplication
 @Slf4j
 public class Practice6RestApplication {
 
-    @Autowired
     private final ProductService productService;
 
+    @Autowired
     public Practice6RestApplication(ProductService productService) {
         this.productService = productService;
     }
@@ -30,6 +29,7 @@ public class Practice6RestApplication {
 
     @PostConstruct
     private void insertProducts() {
+
         Product pizza = new Product("Pizza", 10.5, "https://static.sscontent.com/prodimg/thumb/500/500/products/124/v1061874_prozis_4-x-ultra-thin-pizza-crusts_4.jpg", false, ProductType.FOOD);
         Product ramen = new Product("Ramen", 11.0, "https://www.elmundoeats.com/wp-content/uploads/2021/02/FP-Quick-30-minutes-chicken-ramen-500x500.jpg", false, ProductType.FOOD);
         Product sushi = new Product("Sushi", 14.5, "https://blog.dia.es/wp-content/uploads/2020/06/sushi-8V3FQM6-500x500.jpg", true, ProductType.FOOD);
