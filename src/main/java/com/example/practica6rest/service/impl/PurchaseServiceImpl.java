@@ -8,8 +8,11 @@ import com.google.gson.reflect.TypeToken;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
@@ -46,6 +49,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 
     @Transactional
     @Override
+    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Purchase> registry(Purchase newPurchase) {
 
         Client client = newPurchase.getClient();

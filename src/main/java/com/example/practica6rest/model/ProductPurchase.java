@@ -1,6 +1,7 @@
 package com.example.practica6rest.model;
 
 import com.example.practica6rest.model.MtoM.ProductPurchaseId;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,13 +22,13 @@ public class ProductPurchase {
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("purchase_id")
     @JoinColumn(name = "purchase_id")
-    @JsonManagedReference
+    @JsonBackReference("purchase_productPurchases")
     private Purchase purchase;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("product_id")
     @JoinColumn(name = "product_id")
-    @JsonManagedReference
+    @JsonBackReference("product_productPurchases")
     private Product product;
 
     public ProductPurchase(Purchase purchase, Product product) {

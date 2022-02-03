@@ -1,5 +1,7 @@
 package com.example.practica6rest.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -25,12 +27,15 @@ public class Restaurant {
     private Integer capacity;
 
     @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY)
+    @JsonManagedReference("restaurant_purchases")
     private List<Purchase> purchase;
 
     @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY)
+    @JsonManagedReference("restaurant_restDesks")
     private List<RestDesk> restDesks;
 
     @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY)
+    @JsonManagedReference("restaurant_reservations")
     private List<Reservation> reservations;
 
     public Restaurant(String city, Integer capacity) {

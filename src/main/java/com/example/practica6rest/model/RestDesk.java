@@ -1,6 +1,8 @@
 package com.example.practica6rest.model;
 
 import com.example.practica6rest.model.MtoM.RestDeskId;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -20,11 +22,13 @@ public class RestDesk {
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("restaurant_id")
     @JoinColumn(name = "restaurant_id")
+    @JsonBackReference("restaurant_restDesks")
     private Restaurant restaurant;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("desk_id")
     @JoinColumn(name = "desk_id")
+    @JsonBackReference("desk_restDesks")
     private Desk desk;
 
     @Column

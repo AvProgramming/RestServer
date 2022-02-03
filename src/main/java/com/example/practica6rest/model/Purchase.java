@@ -2,6 +2,7 @@ package com.example.practica6rest.model;
 
 import com.example.practica6rest.model.enumeral.PurchaseStatus;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
@@ -24,6 +25,7 @@ public class Purchase {
     private Long id;
 
     @Column
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date time;
 
     @Column
@@ -38,16 +40,16 @@ public class Purchase {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id")
-    @JsonManagedReference
+    @JsonBackReference("client_purchases")
     private Client client;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id")
-    @JsonManagedReference
+    @JsonBackReference("restaurant_purchases")
     private Restaurant restaurant;
 
     @OneToMany(mappedBy = "purchase", fetch = FetchType.LAZY)
-    @JsonBackReference
+    @JsonManagedReference("purchase_productPurchases")
     private List<ProductPurchase> productPurchase;
 
     public Purchase(Date time, String content, Double total_price, PurchaseStatus type) {
