@@ -21,6 +21,7 @@ public class ProductPurchase {
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("purchase_id")
     @JoinColumn(name = "purchase_id")
+    @JsonManagedReference
     private Purchase purchase;
 
     @ManyToOne(fetch = FetchType.LAZY)

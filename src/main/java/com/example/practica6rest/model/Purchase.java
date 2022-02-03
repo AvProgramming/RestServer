@@ -47,7 +47,7 @@ public class Purchase {
     private Restaurant restaurant;
 
     @OneToMany(mappedBy = "purchase", fetch = FetchType.LAZY)
-    @JsonIgnore
+    @JsonBackReference
     private List<ProductPurchase> productPurchase;
 
     public Purchase(Date time, String content, Double total_price, PurchaseStatus type) {
