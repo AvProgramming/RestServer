@@ -38,6 +38,11 @@ public class Desk {
         this.number = number;
         this.max_capacity = max_capacity;
     }
+    public Desk(Long id, Integer number, Integer max_capacity) {
+        this.id = id;
+        this.number = number;
+        this.max_capacity = max_capacity;
+    }
 
     public Desk() {
     }
