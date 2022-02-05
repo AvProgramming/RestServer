@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Slf4j
@@ -51,6 +53,8 @@ public class PurchaseServiceImpl implements PurchaseService {
     @Override
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Purchase> registry(Purchase newPurchase) {
+        log.info("CONTENT of purchase " + newPurchase);
+
         Client client = newPurchase.getClient();
         Restaurant restaurant = newPurchase.getRestaurant();
 
@@ -58,30 +62,39 @@ public class PurchaseServiceImpl implements PurchaseService {
             throw new EntityNotFoundException("NO Client");
         }
 
-        if (restaurant== null || !restaurantRepository.existsById(restaurant.getId())) {
+        if (restaurant == null || !restaurantRepository.existsById(restaurant.getId())) {
             throw new EntityNotFoundException("NO Restaurant");
         }
-        String content = newPurchase.getContent();
-        newPurchase.setContent("TEMPORAL"); //@TODO
 
         Purchase purchase = purchaseRepository.save(newPurchase);
-        log.info(String.valueOf(purchase));
+        log.info("Purchase successfully added  + " + purchase);
+
+        String content = newPurchase.getContent();
 
         Gson gson = new Gson();
 
-        log.info("CONTENT " + newPurchase.getContent());
-
-        List<Product> listOfId = gson.fromJson(content, new TypeToken<List<Product>>() {
+        List<Integer> listOfId = gson.fromJson(content, new TypeToken<List<Integer>>() {
         }.getType());
         List<ProductPurchase> productPurchases = new ArrayList<>();
 
-        for (Product product : listOfId) {
-//            Product product = productRepository.getById(Long.valueOf(id));
-            ProductPurchase productPurchase = new ProductPurchase(purchase, product);
+        Map<Integer, Integer> mapOfhQuantity = new HashMap<>();
+
+        for (Integer keyId : listOfId) {
+            if (mapOfhQuantity.containsKey(keyId)) {
+                mapOfhQuantity.put(keyId, mapOfhQuantity.get(keyId) + 1);
+            } else {
+                mapOfhQuantity.put(keyId, 1);
+            }
+        }
+
+        for (Map.Entry<Integer, Integer> entry : mapOfhQuantity.entrySet()) {
+            Product product = productRepository.getById(Long.valueOf(entry.getKey()));
+            ProductPurchase productPurchase = new ProductPurchase(purchase, product, entry.getValue());
             productPurchases.add(productPurchase);
         }
 
         productPurchaseRepository.saveAll(productPurchases);
+        log.info("Product Purchases successfully added  + " + productPurchases);
 
         return new ResponseEntity<>(purchase, HttpStatus.CREATED);
     }

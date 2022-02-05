@@ -31,9 +31,13 @@ public class ProductPurchase {
     @JsonBackReference("product_productPurchases")
     private Product product;
 
-    public ProductPurchase(Purchase purchase, Product product) {
+    @Column
+    private Integer quantity;
+
+    public ProductPurchase(Purchase purchase, Product product, Integer quantity) {
         this.purchase = purchase;
         this.product = product;
+        this.quantity = quantity;
     }
 
     public ProductPurchase() {
