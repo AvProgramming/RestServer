@@ -29,6 +29,7 @@ public class ProductServiceImpl implements ProductService {
             throw new EntityNotFoundException("NO SUCH DESK");
 
         }
+        log.info("Product with id: " + id + " retrieved successfully");
         return productRepository.getById(id);
     }
 
@@ -55,6 +56,7 @@ public class ProductServiceImpl implements ProductService {
                     product.setName(newProduct.getName());
                     product.setPrice(newProduct.getPrice());
                     product.setImg_url(newProduct.getImg_url());
+                    log.info("Product is updated successfully " + newProduct);
                     return productRepository.save(product);
                 })
                 .orElseThrow(() -> new EntityNotFoundException("NO SUCH DESK"));
@@ -66,6 +68,7 @@ public class ProductServiceImpl implements ProductService {
         if (!productRepository.existsById(id)) {
             throw new EntityNotFoundException("NO SUCH PRODUCT");     //@Todo Exceptions
         }
+        log.info("Product with id: " + id + " is successfully deleted");
         productRepository.deleteById(id);
     }
 }

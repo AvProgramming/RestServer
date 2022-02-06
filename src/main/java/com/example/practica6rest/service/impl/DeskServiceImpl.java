@@ -37,6 +37,7 @@ public class DeskServiceImpl implements DeskService {
         if (!deskRepository.existsById(id)) {
             throw new EntityNotFoundException("NO SUCH DESK");
         }
+        log.info("Desk with id: " + id + " retrieved successfully");
         return deskRepository.getById(id);
     }
 
@@ -55,6 +56,7 @@ public class DeskServiceImpl implements DeskService {
         if (!deskRepository.existsById(id)) {
             throw new EntityNotFoundException("NO SUCH DESK");     //@Todo Exceptions
         }
+        log.info("Desk with id: " + id + " is successfully deleted");
         deskRepository.deleteById(id);
     }
 
@@ -69,16 +71,20 @@ public class DeskServiceImpl implements DeskService {
         oldDesk.setNumber(newDesk.getNumber());
         oldDesk.setMax_capacity(newDesk.getMax_capacity());
 
+        log.info("Desk: " + newDesk + " updated successfully");
+
         return deskRepository.saveAndFlush(oldDesk);
     }
 
     @Override
     public Page<Desk> findPaginated(int page, int size) {
+        log.info("Retrieved paginated desks successfully");
         return deskRepository.findAll(PageRequest.of(page, size));
     }
 
     @Override
     public Page<Desk> findPaginated(int page, int size, String field) {
+        log.info("Retrieved paginated desks successfully");
         return deskRepository.findAll(PageRequest.of(page, size).withSort(Sort.by(field)));
     }
 

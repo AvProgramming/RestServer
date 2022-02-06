@@ -51,6 +51,7 @@ public class PurchaseServiceImpl implements PurchaseService {
         if (!purchaseRepository.existsById(id)) {
             throw new EntityNotFoundException("NO SUCH Purchase");
         }
+        log.info("Purchase with id: " + id + " retrieved successfully");
         return purchaseRepository.findById(id).get();
     }
 
@@ -114,6 +115,7 @@ public class PurchaseServiceImpl implements PurchaseService {
         return purchaseRepository.findById(id)
                 .map(purchase -> {
                     purchase.setType(newPurchase.getType());
+                    log.info("Purchase is updated successfully " + newPurchase);
                     return purchaseRepository.save(purchase);
                 })
                 .orElseThrow(() -> new EntityNotFoundException("NO SUCH PURCHASE"));
@@ -124,8 +126,8 @@ public class PurchaseServiceImpl implements PurchaseService {
         if (!purchaseRepository.existsById(id)) {
             throw new EntityNotFoundException("NO SUCH PURCHASE");     //Todo Exceptions
         }
-        log.info("success");
         purchaseRepository.deleteById(id);
+        log.info("Purchase with id: " + id + " is successfully deleted");
     }
 
     @Override
@@ -157,6 +159,8 @@ public class PurchaseServiceImpl implements PurchaseService {
             response.put("currentPage", pagePurchases.getNumber());
             response.put("totalItems", pagePurchases.getTotalElements());
             response.put("totalPages", pagePurchases.getTotalPages());
+
+            log.info("Purchases successfully retrieved from database into pageable endpoint");
 
             return new ResponseEntity<>(response, HttpStatus.OK);
 

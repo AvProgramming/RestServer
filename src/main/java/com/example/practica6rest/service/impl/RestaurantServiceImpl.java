@@ -29,6 +29,7 @@ public class RestaurantServiceImpl implements RestaurantService {
             throw new EntityNotFoundException("NO SUCH DESK");
 
         }
+        log.info("Restaurant with id: " + id + " retrieved successfully");
         return restaurantRepository.getById(id);
     }
 
@@ -52,6 +53,7 @@ public class RestaurantServiceImpl implements RestaurantService {
                 .map(restaurant -> {
                     restaurant.setCity(newRestaurant.getCity());
                     restaurant.setCapacity(newRestaurant.getCapacity());
+                    log.info("Restaurant is updated successfully " + newRestaurant);
                     return restaurantRepository.save(restaurant);
                 })
                 .orElseThrow(() -> new EntityNotFoundException("NO SUCH RESTAURANT"));
@@ -59,6 +61,10 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public void delete(Long id) {
-
+        if (!restaurantRepository.existsById(id)) {
+            throw new EntityNotFoundException("NO SUCH PURCHASE");
+        }
+        log.info("Restaurant with id: " + id + " is successfully deleted");
+        restaurantRepository.deleteById(id);
     }
 }

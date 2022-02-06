@@ -30,6 +30,7 @@ public class ReservationServiceImpl implements ReservationService {
             throw new EntityNotFoundException("NO SUCH DESK");
 
         }
+        log.info("Reservation with id: " + id + " retrieved successfully");
         return reservationRepository.getById(id);
     }
 
@@ -56,6 +57,7 @@ public class ReservationServiceImpl implements ReservationService {
                     reservation.setDesk(newReservation.getDesk());
                     reservation.setRestaurant(newReservation.getRestaurant());
                     reservation.setClient(newReservation.getClient());
+                    log.info("Reservation is updated successfully " + newReservation);
                     return reservationRepository.save(reservation);
                 })
                 .orElseThrow(() -> new EntityNotFoundException("NO SUCH RESERVATION"));
@@ -65,8 +67,9 @@ public class ReservationServiceImpl implements ReservationService {
     public void delete(Long id) {
         //TODO logic
         if (!reservationRepository.existsById(id)) {
-            throw new EntityNotFoundException("NO SUCH PURCHASE");     //@Todo Exceptions
+            throw new EntityNotFoundException("NO SUCH RESERVATION");
         }
+        log.info("Reservation with id: " + id + " is successfully deleted");
         reservationRepository.deleteById(id);
     }
 }

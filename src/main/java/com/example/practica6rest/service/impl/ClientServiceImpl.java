@@ -29,6 +29,7 @@ public class ClientServiceImpl implements ClientService {
             throw new EntityNotFoundException("NO SUCH DESK");
 
         }
+        log.info("Client with id: " + id + " retrieved successfully");
         return clientRepository.getById(id);
     }
 
@@ -55,6 +56,7 @@ public class ClientServiceImpl implements ClientService {
                     client.setName(newClient.getName());
                     client.setEmail(newClient.getEmail());
                     client.setPhone_number(newClient.getPhone_number());
+                    log.info("Client is updated successfully " + newClient);
                     return clientRepository.save(client);
                 })
                 .orElseThrow(() -> new EntityNotFoundException("NO SUCH CLIENT"));
@@ -66,6 +68,7 @@ public class ClientServiceImpl implements ClientService {
         if (!clientRepository.existsById(id)) {
             throw new EntityNotFoundException("NO SUCH CLIENT");     //Todo Exceptions
         }
+        log.info("Client with id: " + id + " is successfully deleted");
         clientRepository.deleteById(id);
     }
 
