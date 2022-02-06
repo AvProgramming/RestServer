@@ -11,6 +11,7 @@
     <groupId>com.example</groupId>
     <artifactId>Practica6Rest</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
     <name>Practica6Rest</name>
     <description>Practica6Rest</description>
     <properties>
@@ -82,6 +83,11 @@
             <artifactId>lombok-maven-plugin</artifactId>
             <version>1.18.20.0</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.cloud.tools</groupId>
+            <artifactId>appengine-maven-plugin</artifactId>
+            <version>2.4.1</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
