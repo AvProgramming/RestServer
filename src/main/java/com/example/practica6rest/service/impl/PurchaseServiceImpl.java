@@ -7,6 +7,9 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -94,7 +97,7 @@ public class PurchaseServiceImpl implements PurchaseService {
         }
 
         productPurchaseRepository.saveAll(productPurchases);
-        log.info("Product Purchases successfully added  + " + productPurchases);
+//        log.info("Product Purchases successfully added  + " + productPurchases);
 
         return new ResponseEntity<>(purchase, HttpStatus.CREATED);
     }
@@ -110,10 +113,8 @@ public class PurchaseServiceImpl implements PurchaseService {
         //TODO logic
         return purchaseRepository.findById(id)
                 .map(purchase -> {
-                    purchase.setTime(newPurchase.getTime());
-                    purchase.setContent(newPurchase.getContent());
-                    purchase.setRestaurant(newPurchase.getRestaurant());
-                    purchase.setClient(newPurchase.getClient());
+                    purchase.setType(newPurchase.getType());
+                    System.out.println("SUCCESS");
                     return purchaseRepository.save(purchase);
                 })
                 .orElseThrow(() -> new EntityNotFoundException("NO SUCH PURCHASE"));
@@ -125,6 +126,17 @@ public class PurchaseServiceImpl implements PurchaseService {
         if (!purchaseRepository.existsById(id)) {
             throw new EntityNotFoundException("NO SUCH PURCHASE");     //Todo Exceptions
         }
+        log.info("success");
         purchaseRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<Purchase> findPaginated(int page, int size) {
+        return purchaseRepository.findAll(PageRequest.of(page, size));
+    }
+
+    @Override
+    public Page<Purchase> findPaginated(int page, int size, String field) {
+        return purchaseRepository.findAll(PageRequest.of(page, size).withSort(Sort.by(field)));
     }
 }

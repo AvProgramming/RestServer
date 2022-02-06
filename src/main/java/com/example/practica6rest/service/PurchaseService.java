@@ -1,7 +1,7 @@
 package com.example.practica6rest.service;
 
-import com.example.practica6rest.model.Client;
 import com.example.practica6rest.model.Purchase;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -16,4 +16,8 @@ public interface PurchaseService {
     Purchase update(Purchase newPurchase, Long id);
 
     void delete(Long id);
+
+    Page<Purchase> findPaginated(int page, int size);
+
+    Page<Purchase> findPaginated(int page, int size, String field);
 }
