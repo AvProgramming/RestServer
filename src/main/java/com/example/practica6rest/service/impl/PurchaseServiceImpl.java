@@ -1,6 +1,7 @@
 package com.example.practica6rest.service.impl;
 
 import com.example.practica6rest.model.*;
+import com.example.practica6rest.model.enumeral.PurchaseStatus;
 import com.example.practica6rest.repository.*;
 import com.example.practica6rest.service.PurchaseService;
 import com.google.gson.Gson;
@@ -9,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -104,17 +106,14 @@ public class PurchaseServiceImpl implements PurchaseService {
 
     @Override
     public List<Purchase> getAll() {
-        //TODO logic
         return purchaseRepository.findAll();
     }
 
     @Override
     public Purchase update(Purchase newPurchase, Long id) {
-        //TODO logic
         return purchaseRepository.findById(id)
                 .map(purchase -> {
                     purchase.setType(newPurchase.getType());
-                    System.out.println("SUCCESS");
                     return purchaseRepository.save(purchase);
                 })
                 .orElseThrow(() -> new EntityNotFoundException("NO SUCH PURCHASE"));
@@ -122,7 +121,6 @@ public class PurchaseServiceImpl implements PurchaseService {
 
     @Override
     public void delete(Long id) {
-        //TODO logic
         if (!purchaseRepository.existsById(id)) {
             throw new EntityNotFoundException("NO SUCH PURCHASE");     //Todo Exceptions
         }
@@ -138,5 +136,32 @@ public class PurchaseServiceImpl implements PurchaseService {
     @Override
     public Page<Purchase> findPaginated(int page, int size, String field) {
         return purchaseRepository.findAll(PageRequest.of(page, size).withSort(Sort.by(field)));
+    }
+
+    @Override
+    public ResponseEntity<Map<String, Object>> findPaginatedFiltered(int page, int size, String field) {
+        try {
+            List<Purchase> purchases;
+            Pageable paging = PageRequest.of(page, size);
+
+            Page<Purchase> pagePurchases;
+            if (field == null) {
+                pagePurchases = purchaseRepository.findAll(paging);
+            } else {
+                pagePurchases = purchaseRepository.findByType(PurchaseStatus.valueOf(field), paging);
+            }
+            purchases = pagePurchases.getContent();
+
+            Map<String, Object> response = new HashMap<>();
+            response.put("purchases", purchases);
+            response.put("currentPage", pagePurchases.getNumber());
+            response.put("totalItems", pagePurchases.getTotalElements());
+            response.put("totalPages", pagePurchases.getTotalPages());
+
+            return new ResponseEntity<>(response, HttpStatus.OK);
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
+import java.util.Map;
 
 public interface PurchaseService {
     Purchase getById(Long id);
@@ -20,4 +21,6 @@ public interface PurchaseService {
     Page<Purchase> findPaginated(int page, int size);
 
     Page<Purchase> findPaginated(int page, int size, String field);
+
+    ResponseEntity<Map<String, Object>>findPaginatedFiltered(int page, int size, String field);
 }
