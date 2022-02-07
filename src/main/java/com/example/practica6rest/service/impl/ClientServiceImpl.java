@@ -56,7 +56,7 @@ public class ClientServiceImpl implements ClientService {
                     client.setName(newClient.getName());
                     client.setEmail(newClient.getEmail());
                     client.setPhone_number(newClient.getPhone_number());
-                    log.info("Client is updated successfully " + newClient);
+                    log.info("Client with id: " + id + "is updated successfully");
                     return clientRepository.save(client);
                 })
                 .orElseThrow(() -> new EntityNotFoundException("NO SUCH CLIENT"));

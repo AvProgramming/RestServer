@@ -57,7 +57,7 @@ public class ReservationServiceImpl implements ReservationService {
                     reservation.setDesk(newReservation.getDesk());
                     reservation.setRestaurant(newReservation.getRestaurant());
                     reservation.setClient(newReservation.getClient());
-                    log.info("Reservation is updated successfully " + newReservation);
+                    log.info("Reservation with id: " + id + " is updated successfully");
                     return reservationRepository.save(reservation);
                 })
                 .orElseThrow(() -> new EntityNotFoundException("NO SUCH RESERVATION"));

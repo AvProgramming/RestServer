@@ -53,7 +53,7 @@ public class RestaurantServiceImpl implements RestaurantService {
                 .map(restaurant -> {
                     restaurant.setCity(newRestaurant.getCity());
                     restaurant.setCapacity(newRestaurant.getCapacity());
-                    log.info("Restaurant is updated successfully " + newRestaurant);
+                    log.info("Restaurant with id: " + id + "is updated successfully");
                     return restaurantRepository.save(restaurant);
                 })
                 .orElseThrow(() -> new EntityNotFoundException("NO SUCH RESTAURANT"));

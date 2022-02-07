@@ -71,7 +71,7 @@ public class DeskServiceImpl implements DeskService {
         oldDesk.setNumber(newDesk.getNumber());
         oldDesk.setMax_capacity(newDesk.getMax_capacity());
 
-        log.info("Desk: " + newDesk + " updated successfully");
+        log.info("Desk with id: " + id + "is updated successfully");
 
         return deskRepository.saveAndFlush(oldDesk);
     }

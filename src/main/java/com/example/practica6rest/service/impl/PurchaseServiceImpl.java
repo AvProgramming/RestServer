@@ -115,7 +115,7 @@ public class PurchaseServiceImpl implements PurchaseService {
         return purchaseRepository.findById(id)
                 .map(purchase -> {
                     purchase.setType(newPurchase.getType());
-                    log.info("Purchase is updated successfully " + newPurchase);
+                    log.info("Purchase with id: " + id + " is updated successfully");
                     return purchaseRepository.save(purchase);
                 })
                 .orElseThrow(() -> new EntityNotFoundException("NO SUCH PURCHASE"));

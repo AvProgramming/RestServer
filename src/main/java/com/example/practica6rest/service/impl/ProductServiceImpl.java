@@ -56,7 +56,7 @@ public class ProductServiceImpl implements ProductService {
                     product.setName(newProduct.getName());
                     product.setPrice(newProduct.getPrice());
                     product.setImg_url(newProduct.getImg_url());
-                    log.info("Product is updated successfully " + newProduct);
+                    log.info("Product with id: " + id + "is updated successfully");
                     return productRepository.save(product);
                 })
                 .orElseThrow(() -> new EntityNotFoundException("NO SUCH DESK"));
