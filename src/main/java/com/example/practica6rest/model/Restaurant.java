@@ -26,15 +26,15 @@ public class Restaurant {
     @Column
     private Integer capacity;
 
-    @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY, orphanRemoval = true)
     @JsonManagedReference("restaurant_purchases")
     private List<Purchase> purchase;
 
-    @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY, orphanRemoval = true)
     @JsonManagedReference("restaurant_restDesks")
     private List<RestDesk> restDesks;
 
-    @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY, orphanRemoval = true)
     @JsonManagedReference("restaurant_reservations")
     private List<Reservation> reservations;
 

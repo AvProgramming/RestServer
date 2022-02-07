@@ -1,7 +1,6 @@
 package com.example.practica6rest.model;
 
 import com.example.practica6rest.model.enumeral.ProductType;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
@@ -37,7 +36,7 @@ public class Product {
     @Enumerated(EnumType.ORDINAL)
     private ProductType type;
 
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, orphanRemoval = true)
     @JsonManagedReference("product_productPurchases")
     private List<ProductPurchase> productPurchase;
 

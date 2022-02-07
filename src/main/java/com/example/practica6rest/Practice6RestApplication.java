@@ -53,7 +53,7 @@ public class Practice6RestApplication {
         }
 
         if (listOfEqualProducts.isEmpty()) {
-            for (Product product:productsToInsert) {
+            for (Product product : productsToInsert) {
                 productService.registry(product);
             }
         }

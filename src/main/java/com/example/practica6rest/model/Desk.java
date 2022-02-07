@@ -1,6 +1,5 @@
 package com.example.practica6rest.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,11 +25,11 @@ public class Desk {
     @Column
     private Integer max_capacity;
 
-    @OneToMany(mappedBy = "desk", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "desk", fetch = FetchType.LAZY, orphanRemoval = true)
     @JsonManagedReference("desk_restDesks")
     private List<RestDesk> restDesks;
 
-    @OneToMany(mappedBy = "desk", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "desk", fetch = FetchType.LAZY, orphanRemoval = true)
     @JsonManagedReference("desk_reservations")
     private List<Reservation> reservations;
 
@@ -38,6 +37,7 @@ public class Desk {
         this.number = number;
         this.max_capacity = max_capacity;
     }
+
     public Desk(Long id, Integer number, Integer max_capacity) {
         this.id = id;
         this.number = number;

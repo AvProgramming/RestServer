@@ -3,7 +3,6 @@ package com.example.practica6rest.model;
 import com.example.practica6rest.model.enumeral.PurchaseStatus;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,7 +24,7 @@ public class Purchase {
     private Long id;
 
     @Column
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date time;
 
     @Column
@@ -48,7 +47,7 @@ public class Purchase {
     @JsonBackReference("restaurant_purchases")
     private Restaurant restaurant;
 
-    @OneToMany(mappedBy = "purchase", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "purchase", fetch = FetchType.LAZY, orphanRemoval = true)
     @JsonManagedReference("purchase_productPurchases")
     private List<ProductPurchase> productPurchase;
 
