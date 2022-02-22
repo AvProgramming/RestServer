@@ -18,7 +18,7 @@ import java.util.List;
 @ToString
 @Table(name = "client")
 public class Client {
-
+//    @Todo Add roles and maybe create User entity for security
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -59,8 +59,9 @@ public class Client {
     @Column(name = "updated_by")
     private String updatedBy;
 
-    public Client(String name, String email, Integer phone_number) {
+    public Client(String name, String password, String email, Integer phone_number) {
         this.name = name;
+        this.password = password;
         this.email = email;
         this.phone_number = phone_number;
     }
