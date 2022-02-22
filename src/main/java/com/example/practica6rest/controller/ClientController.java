@@ -1,6 +1,6 @@
 package com.example.practica6rest.controller;
 
-import com.example.practica6rest.model.Client;
+import com.example.practica6rest.dto.ClientDto;
 import com.example.practica6rest.service.ClientService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,22 +22,22 @@ public class ClientController {
     }
 
     @GetMapping("/")
-    public List<Client> getClients() {
+    public List<ClientDto> getClients() {
         return clientService.getAll();
     }
 
     @PostMapping("/")
-    public ResponseEntity<Client> createClient(@RequestBody Client newClient) {
+    public ResponseEntity<ClientDto> createClient(@RequestBody ClientDto newClient) {
         return clientService.registry(newClient);
     }
 
     @GetMapping(value = "/{id}")
-    public Client getClientById(@PathVariable Long id) {
+    public ClientDto getClientById(@PathVariable Long id) {
         return clientService.getById(id);
     }
 
     @PutMapping("/{id}")
-    public Client updateClient(@RequestBody Client client, @PathVariable Long id) {
+    public ClientDto updateClient(@RequestBody ClientDto client, @PathVariable Long id) {
         return clientService.update(client, id);
     }
 

@@ -1,8 +1,11 @@
 package com.example.practica6rest.service.impl;
 
+import com.example.practica6rest.dto.ClientDto;
 import com.example.practica6rest.model.Client;
 import com.example.practica6rest.repository.ClientRepository;
+import com.example.practica6rest.security.SecurityContextHolder;
 import com.example.practica6rest.service.ClientService;
+import com.example.practica6rest.translator.ClientTranslator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,47 +28,68 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Client getById(Long id) {
+    public ClientDto getById(Long id) {
         if (!clientRepository.existsById(id)) {
             throw new EntityNotFoundException("NO SUCH DESK");
 
         }
         log.info("Client with id: " + id + " retrieved successfully");
-        return clientRepository.getById(id);
+        Client client = clientRepository.getById(id);
+        ClientDto clientDto = new ClientDto();
+        new ClientTranslator().toDto(client, clientDto);
+        return clientDto;
     }
 
     @Override
-    public ResponseEntity<Client> registry(Client newClient) {
-        //TODO logic
-        Client client = clientRepository.save(newClient);
-        log.info(String.valueOf(client));
+    public ResponseEntity<ClientDto> registry(ClientDto newClient) {
+        Client client = new Client();
+        new ClientTranslator().fromDto(newClient, client);
+        client.setCreatedBy(newClient.getName());
+        client.setUpdatedBy(newClient.getName());
 
-        return new ResponseEntity<>(client, HttpStatus.CREATED);
+        clientRepository.save(client);
+        new ClientTranslator().toDto(client, newClient);
+
+        log.info(String.valueOf(newClient));
+
+        return new ResponseEntity<>(newClient, HttpStatus.CREATED);
     }
 
     @Override
-    public List<Client> getAll() {
-        //TODO logic
-        return clientRepository.findAll();
+    public List<ClientDto> getAll() {
+
+        List<Client> clients = clientRepository.findAll();
+        List<ClientDto> clientDtos = new ArrayList<>();
+
+        for (Client client : clients) {
+            ClientDto clientDto = new ClientDto();
+            new ClientTranslator().toDto(client, clientDto);
+            clientDtos.add(clientDto);
+        }
+
+        return clientDtos;
     }
 
     @Override
-    public Client update(Client newClient, Long id) {
-        //TODO logic
+    public ClientDto update(ClientDto newClient, Long id) {
+
         return clientRepository.findById(id)
-                .map(client -> {
-                    client.setName(newClient.getName());
-                    client.setEmail(newClient.getEmail());
-                    client.setPhone_number(newClient.getPhone_number());
+                .map(clientDto -> {
+                    clientDto.setName(newClient.getName());
+                    clientDto.setEmail(newClient.getEmail());
+                    clientDto.setPhone_number(newClient.getPhone_number());
+//                    clientDto.setUpdatedBy(SecurityContextHolder.get().getUser().getName());
                     log.info("Client with id: " + id + "is updated successfully");
-                    return clientRepository.save(client);
+                    Client client = clientRepository.save(clientDto);
+                    ClientDto newClientDto = new ClientDto();
+                    new ClientTranslator().toDto(client, newClientDto);
+                    return newClientDto;
                 })
                 .orElseThrow(() -> new EntityNotFoundException("NO SUCH CLIENT"));
     }
 
     @Override
     public void delete(Long id) {
-        //TODO logic
         if (!clientRepository.existsById(id)) {
             throw new EntityNotFoundException("NO SUCH CLIENT");     //Todo Exceptions
         }
