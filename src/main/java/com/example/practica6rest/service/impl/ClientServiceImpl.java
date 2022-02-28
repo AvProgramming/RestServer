@@ -3,7 +3,6 @@ package com.example.practica6rest.service.impl;
 import com.example.practica6rest.dto.ClientDto;
 import com.example.practica6rest.model.Client;
 import com.example.practica6rest.repository.ClientRepository;
-import com.example.practica6rest.security.SecurityContextHolder;
 import com.example.practica6rest.service.ClientService;
 import com.example.practica6rest.translator.ClientTranslator;
 import lombok.extern.slf4j.Slf4j;
@@ -42,6 +41,10 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public ResponseEntity<ClientDto> registry(ClientDto newClient) {
+        if (clientRepository.existsByEmail(newClient.getEmail())) {
+            log.info("Client with email: " + newClient.getEmail() + "is already exist");
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
         Client client = new Client();
         new ClientTranslator().fromDto(newClient, client);
         client.setCreatedBy(newClient.getName());

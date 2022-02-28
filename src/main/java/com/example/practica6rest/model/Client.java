@@ -26,10 +26,10 @@ public class Client {
     @Column
     private String name;
 
-    @Column
+    @Column(length = 5000)
     private String password;
 
-    @Column
+    @Column(unique = true)
     private String email;
 
     @Column
