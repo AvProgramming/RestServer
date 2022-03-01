@@ -9,6 +9,7 @@ public final class ClientTranslator {
         destination.setId(source.getId());
         destination.setName(source.getName());
         destination.setEmail(source.getEmail());
+        destination.setPassword(source.getPassword());
         destination.setPhone_number(source.getPhone_number());
     }
 
@@ -16,6 +17,7 @@ public final class ClientTranslator {
         destination.setId(source.getId());
         destination.setName(source.getName());
         destination.setEmail(source.getEmail());
+        destination.setPassword(source.getPassword());
         destination.setPhone_number(source.getPhone_number());
     }
 }

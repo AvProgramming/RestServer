@@ -10,6 +10,8 @@ import java.util.List;
 public interface ClientService {
     ClientDto getById(Long id);
 
+    ResponseEntity<ClientDto> getByEmail(String email);
+
     ResponseEntity<ClientDto> registry(ClientDto newClient);
 
     List<ClientDto> getAll();

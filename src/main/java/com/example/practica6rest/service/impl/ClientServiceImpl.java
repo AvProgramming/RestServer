@@ -40,6 +40,20 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
+    public ResponseEntity<ClientDto> getByEmail(String email) {
+        if (!clientRepository.existsByEmail(email)) {
+            log.info("Client with email: " + email + "does not exist");
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        } else {
+            Client client = clientRepository.getClientByEmail(email);
+            ClientDto clientDto = new ClientDto();
+            new ClientTranslator().toDto(client, clientDto);
+
+            return new ResponseEntity<>(clientDto, HttpStatus.CREATED);
+        }
+    }
+
+    @Override
     public ResponseEntity<ClientDto> registry(ClientDto newClient) {
         if (clientRepository.existsByEmail(newClient.getEmail())) {
             log.info("Client with email: " + newClient.getEmail() + "is already exist");

@@ -36,6 +36,11 @@ public class ClientController {
         return clientService.getById(id);
     }
 
+    @GetMapping(value = "/login/{email}")
+    public ResponseEntity<ClientDto> getClientByEmail(@PathVariable String email) {
+        return clientService.getByEmail(email);
+    }
+
     @PutMapping("/{id}")
     public ClientDto updateClient(@RequestBody ClientDto client, @PathVariable Long id) {
         return clientService.update(client, id);
