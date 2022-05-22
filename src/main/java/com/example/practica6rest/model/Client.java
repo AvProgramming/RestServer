@@ -2,6 +2,7 @@ package com.example.practica6rest.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AccessLevel;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -13,9 +14,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
-@ToString
+@Data
 @Table(name = "client")
 public class Client {
 //    @Todo Add roles and maybe create User entity for security
@@ -34,6 +33,9 @@ public class Client {
 
     @Column
     private Integer phone_number;
+
+    @Column
+    private String address;
 
     @OneToMany(mappedBy = "client", fetch = FetchType.LAZY, orphanRemoval = true)
     @JsonManagedReference("client_purchases")

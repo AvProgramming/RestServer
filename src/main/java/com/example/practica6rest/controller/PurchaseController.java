@@ -48,13 +48,8 @@ public class PurchaseController {
         purchaseService.delete(id);
     }
 
-    @GetMapping(value = "/pagination/{page}/{size}/{field}")
-    public Page<Purchase> getPurchasePageableAndSorted(@PathVariable int page, @PathVariable int size, @PathVariable String field) {
-        return purchaseService.findPaginated(page, size, field); //@TODO ResponseEntity
-    }
-
     @GetMapping(value = "/pagination/{page}/{size}")
-    public ResponseEntity<Map<String, Object>> getPurchasePageableAndFiltered(@PathVariable int page, @PathVariable int size, @RequestParam(required = false) String field) {
-        return purchaseService.findPaginatedFiltered(page, size, field); //@TODO ResponseEntity
+    public ResponseEntity<Map<String, Object>> getPurchasePageableAndFiltered(@PathVariable int page, @PathVariable int size, @RequestParam(required = false) Integer id) {
+        return purchaseService.findPaginatedFiltered(page, size, id); //@TODO ResponseEntity
     }
 }

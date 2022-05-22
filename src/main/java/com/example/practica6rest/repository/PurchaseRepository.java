@@ -1,5 +1,6 @@
 package com.example.practica6rest.repository;
 
+import com.example.practica6rest.model.Client;
 import com.example.practica6rest.model.Purchase;
 import com.example.practica6rest.model.enumeral.PurchaseStatus;
 import org.springframework.data.domain.Page;
@@ -13,4 +14,6 @@ import java.util.List;
 @Repository
 public interface PurchaseRepository extends JpaRepository<Purchase, Long> {
     Page<Purchase> findByType(PurchaseStatus type, Pageable pageable);
+
+    Page<Purchase> findByClient(Client client, Pageable pageable);
 }

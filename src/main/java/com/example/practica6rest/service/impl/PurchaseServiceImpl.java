@@ -141,16 +141,16 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     @Override
-    public ResponseEntity<Map<String, Object>> findPaginatedFiltered(int page, int size, String field) {
+    public ResponseEntity<Map<String, Object>> findPaginatedFiltered(int page, int size, Integer id) {
         try {
             List<Purchase> purchases;
             Pageable paging = PageRequest.of(page, size);
 
             Page<Purchase> pagePurchases;
-            if (field == null) {
+            if (id == null) {
                 pagePurchases = purchaseRepository.findAll(paging);
             } else {
-                pagePurchases = purchaseRepository.findByType(PurchaseStatus.valueOf(field), paging);
+                pagePurchases = purchaseRepository.findByClient(clientRepository.getById(id.longValue()), paging);
             }
             purchases = pagePurchases.getContent();
 

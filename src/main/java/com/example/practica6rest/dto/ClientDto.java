@@ -2,12 +2,9 @@ package com.example.practica6rest.dto;
 
 import lombok.*;
 
-@Setter
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
-@ToString
 public class ClientDto {
 
     private Long id;
@@ -19,4 +16,6 @@ public class ClientDto {
     private String email;
 
     private Integer phone_number;
+
+    private String address;
 }

@@ -22,5 +22,5 @@ public interface PurchaseService {
 
     Page<Purchase> findPaginated(int page, int size, String field);
 
-    ResponseEntity<Map<String, Object>>findPaginatedFiltered(int page, int size, String field);
+    ResponseEntity<Map<String, Object>>findPaginatedFiltered(int page, int size, Integer id);
 }
