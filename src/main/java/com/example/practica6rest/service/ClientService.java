@@ -18,5 +18,12 @@ public interface ClientService {
 
     ClientDto update(ClientDto newClient, Long id);
 
+    ClientDto updateAddress(ClientDto newClient, Long id);
+
+    ClientDto updatePhone(ClientDto newClient, Long id);
+
+    ClientDto updateEmail(ClientDto newClient, Long id);
+
+
     void delete(Long id);
 }

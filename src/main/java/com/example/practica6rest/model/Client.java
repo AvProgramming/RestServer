@@ -32,7 +32,7 @@ public class Client {
     private String email;
 
     @Column
-    private Integer phone_number;
+    private String phone_number;
 
     @Column
     private String address;
@@ -61,7 +61,7 @@ public class Client {
     @Column(name = "updated_by")
     private String updatedBy;
 
-    public Client(String name, String password, String email, Integer phone_number) {
+    public Client(String name, String password, String email, String phone_number) {
         this.name = name;
         this.password = password;
         this.email = email;

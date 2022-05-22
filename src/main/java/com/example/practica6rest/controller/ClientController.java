@@ -49,9 +49,24 @@ public class ClientController {
     return clientService.getByEmail(email);
   }
 
-  @PutMapping("/{id}")
+  @PatchMapping("/{id}")
   public ClientDto updateClient(@RequestBody ClientDto client, @PathVariable Long id) {
     return clientService.update(client, id);
+  }
+
+  @PatchMapping("address/{id}")
+  public ClientDto updateClientAddress(@RequestBody ClientDto client, @PathVariable Long id) {
+    return clientService.updateAddress(client, id);
+  }
+
+  @PatchMapping("phone/{id}")
+  public ClientDto updateClientPhone(@RequestBody ClientDto client, @PathVariable Long id) {
+    return clientService.updatePhone(client, id);
+  }
+
+  @PatchMapping("email/{id}")
+  public ClientDto updateClientEmail(@RequestBody ClientDto client, @PathVariable Long id) {
+    return clientService.updateEmail(client, id);
   }
 
   @DeleteMapping("/{id}")

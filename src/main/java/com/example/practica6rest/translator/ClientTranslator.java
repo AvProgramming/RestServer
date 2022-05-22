@@ -11,6 +11,7 @@ public final class ClientTranslator {
         destination.setEmail(source.getEmail());
         destination.setPassword(source.getPassword());
         destination.setPhone_number(source.getPhone_number());
+        destination.setAddress(source.getAddress());
     }
 
     public void fromDto (ClientDto source, Client destination){
@@ -19,5 +20,6 @@ public final class ClientTranslator {
         destination.setEmail(source.getEmail());
         destination.setPassword(source.getPassword());
         destination.setPhone_number(source.getPhone_number());
+        destination.setAddress(source.getAddress());
     }
 }
